@@ -3,7 +3,7 @@
 #include <iostream>
 #include <stdexcept>
 
-namespace IAM_DS
+namespace DS
 {
     template < typename value_type >
     class    vector
