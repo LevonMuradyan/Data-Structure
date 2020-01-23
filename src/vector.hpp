@@ -103,16 +103,16 @@ namespace DS
         friend std::ostream& operator<<(std::ostream&, const vector&);
 
         /// return iterator of the first element in the vector
-        //vector<T>::iterator begin() const;
+        vector<T>::iterator begin() const;
 
         /// return iterator of the endpoint in the vector
-        //vector<T>::iterator end() const;
+        vector<T>::iterator end() const;
 
         /// return reverse iterator to reverse beginning in the vector
-        //vector<T>::iterator rbegin() const;
+        vector<T>::iterator rbegin() const;
 
         /// return reverse iterator to reverse end in the vector
-        //vector<T>::iterator rend() const;
+        vector<T>::iterator rend() const;
 
         /// return the first element of the vector
         T& front() const;
@@ -147,6 +147,7 @@ namespace DS
 
         /// checks if memory shoud be reallocated and reallocate
         void check_and_reallocate();
+        friend class iterator;
     };
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -178,14 +179,14 @@ namespace DS
        
     }
 
-    /*template < typename T >
+    template < typename T >
     vector<T>::iterator& vector<T>::iterator::operator=(
         const vector<T>::iterator& other
         )
     {
         v_ptr = other.v_ptr;
         return (*this);
-    }*/
+    }
 
     template < typename T >
     T& vector<T>::iterator::operator*()
@@ -203,7 +204,7 @@ namespace DS
         return *(v_ptr + index);
     }
 
-    /*template < typename T >
+    template < typename T >
     vector<T>::iterator vector<T>::iterator::operator++(int)
     {
         if (v_ptr == nullptr) {
@@ -217,9 +218,9 @@ namespace DS
         vector<T>::iterator temp(*this);
         v_ptr = v_ptr + 1;
         return temp;
-    }*/
+    }
 
-    /*template < typename T >
+    template < typename T >
     vector<T>::iterator& vector<T>::iterator::operator++()
     {
         if (v_ptr == nullptr) {
@@ -232,9 +233,9 @@ namespace DS
 
         v_ptr = v_ptr + 1;
         return (*this);
-    }*/
+    }
 
-    /*template < typename T >
+    template < typename T >
     vector<T>::iterator vector<T>::iterator::operator--(int)
     {
         if (v_ptr == nullptr) {
@@ -248,9 +249,9 @@ namespace DS
         vector<T>::iterator temp(*this);
         v_ptr = v_ptr - 1;
         return temp;
-    }*/
+    }
 
-    /*template < typename T >
+    template < typename T >
     vector<T>::iterator& vector<T>::iterator::operator--()
     {
         if (v_ptr == nullptr) {
@@ -264,18 +265,18 @@ namespace DS
         v_ptr = v_ptr - 1;
         return (*this);
     }
-    */
-    /*template<typename T>
+    
+    template<typename T>
     vector<T>::iterator vector<T>::iterator::operator+(size_t num) const
     {
         return vector<T>::iterator(v_ptr + num);
-    }*/
+    }
 
-    /*template<typename T>
+    template<typename T>
     vector<T>::iterator vector<T>::iterator::operator-(size_t num) const
     {
         return vector<T>::iterator(v_ptr - num);
-    }*/
+    }
 
     template<typename T>
     bool vector<T>::iterator::operator<=(const vector<T>::iterator& other) const
@@ -509,29 +510,29 @@ namespace DS
         return out;
     }
 
-   /* template < typename T >
+    template < typename T >
     vector<T>::iterator vector<T>::begin() const
     {
         return vector<T>::iterator(_container);
-    }*/
+    }
 
-    /*template < typename T >
+    template < typename T >
     vector<T>::iterator vector<T>::end() const
     {
         return vector<T>::iterator(_container + _size);
-    }*/
+    }
 
-    /*template < typename T >
+    template < typename T >
     vector<T>::iterator vector<T>::rbegin() const
     {
         return vector<T>::iterator(_container + _size - 1);
-    }*/
+    }
 
-    /*template < typename T >
+    template < typename T >
     vector<T>::iterator vector<T>::rend() const
     {
         return vector<T>::iterator(_container -1);
-    }*/
+    }
 
     template < typename T >
     T& vector<T>::front() const
