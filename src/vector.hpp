@@ -17,7 +17,7 @@ namespace DS
             void check_and_reallocate();
             friend class iterator;
 
-        public:
+        private:
             class iterator {
 
                 private:
@@ -111,7 +111,8 @@ namespace DS
             vector<T>& operator=(std::initializer_list<T>&);
 
             /// output the vector in this format: {element0, element1, ...}
-            friend std::ostream& operator<<(std::ostream&, const vector&);
+            template < typename Z >  
+            friend std::ostream& operator<< (std::ostream&, const vector<Z>&);
 
             /// return iterator of the first element in the vector
             vector<T>::iterator begin() const;
@@ -454,21 +455,18 @@ namespace DS
     template < typename T >
     size_t vector<T>::size() const
     {
-        std::cout << "rerturn size" << std::endl;
         return _size;
     }
 
     template < typename T >
     size_t vector<T>::capacity() const
     {
-        std::cout << "return capacity" << std::endl;
         return _capacity;
     }
 
     template < typename T >
     bool vector<T>::empty() const
     {
-        std::cout << "empty" << std::endl;
         return _size == 0;
     }
 
