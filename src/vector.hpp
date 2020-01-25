@@ -8,146 +8,148 @@ namespace DS
     template < typename T >
     class vector {
 
-    public:
-        class iterator {
+        private:
+            size_t _size;
+            size_t _capacity;
+            T* _container;
+
+            /// checks if memory shoud be reallocated and reallocate
+            void check_and_reallocate();
+            friend class iterator;
 
         public:
-            /// create an iterator that shows nowhere
-            iterator();
+            class iterator {
 
-            /// copy constructor
-            iterator(const iterator&);
+                private:
+                    T* v_ptr;
+                    friend class vector;
 
-            iterator(T* ptr);
+                public:
+                    /// create an iterator that shows nowhere
+                    iterator();
+
+                    /// copy constructor
+                    iterator(const iterator&);
+
+                    iterator(T* ptr);
+
+                    /// destructor
+                    ~iterator();
+
+                    /// assignment operator
+                    iterator& operator=(const iterator&);
+
+                    /// return the referece to the value of the vector shown by this iterator
+                    T& operator*();
+            
+                    /// return the referece to the value of the vector shown by this iterator
+                    T& operator[](size_t) const;
+
+                    /// increasment and decreasment operators, shold show the next or the previous node
+                    iterator& operator++();    // prefix
+                    iterator operator++(int);  // postfix
+                    iterator& operator--();    // prefix
+                    iterator operator--(int);  // postfix
+
+                    /// addition, subtraction by number 
+                    iterator operator+(size_t) const;
+                    iterator operator-(size_t) const;
+            
+                    /// boolean operators comparing two iterators
+                    bool operator<=(const iterator&) const;
+                    bool operator>=(const iterator&) const;
+                    bool operator==(const iterator&) const;
+                    bool operator!=(const iterator&) const;        
+            };
+
+        public:
+
+            /// create a vector with no elements
+            vector();
+
+            /// vector copy constructor
+            vector(const vector&);
+
+            /// create a vector with a given sequence of data of type "T"
+            vector(const T*, size_t);
+
+            /// create a vector with default constructed elements
+            explicit vector(const size_t);
+
+            /// create a vector with defalult elements
+            vector(const size_t, const T&);
+
+            /// create a vector with initialization list
+            vector(std::initializer_list<T> const&);
 
             /// destructor
-            ~iterator();
+            /// clears the "_container"
+            ~vector();
 
-            /// assignment operator
-            iterator& operator=(const iterator&);
+            /// vecor assignment operator
+            vector<T>& operator=(const vector<T>&);
 
-            /// return the referece to the value of the vector shown by this iterator
-            T& operator*();
-            
-            /// return the referece to the value of the vector shown by this iterator
+            /// add an element to the end of the vector
+            void push_back(const T&);
+
+            /// remove an element from the end of the vector
+            void pop_back();
+
+            /// return the number of elements in the vector
+            size_t size() const;
+
+            size_t capacity() const;
+
+            /// check if the vector is empty
+            bool empty() const;
+
+            /// return the referece to the element in the vector at the given position
+            /// throw an exception if the key is not valid
             T& operator[](size_t) const;
 
-            /// increasment and decreasment operators, shold show the next or the previous node
-            iterator& operator++();    // prefix
-            iterator operator++(int);  // postfix
-            iterator& operator--();    // prefix
-            iterator operator--(int);  // postfix
+            /// return the referece to the vector 
+            vector<T>& operator=(std::initializer_list<T>&);
 
-            /// addition, subtraction by number 
-            iterator operator+(size_t) const;
-            iterator operator-(size_t) const;
-            
-            /// boolean operators comparing two iterators
-            bool operator<=(const iterator&) const;
-            bool operator>=(const iterator&) const;
-            bool operator==(const iterator&) const;
-            bool operator!=(const iterator&) const;
+            /// output the vector in this format: {element0, element1, ...}
+            friend std::ostream& operator<<(std::ostream&, const vector&);
 
-        private:
-            T* v_ptr;
-            friend class vector;
-        };
-    public:
-        /// create a vector with no elements
-        vector();
+            /// return iterator of the first element in the vector
+            vector<T>::iterator begin() const;
 
-        /// vector copy constructor
-        vector(const vector&);
+            /// return iterator of the endpoint in the vector
+            vector<T>::iterator end() const;
 
-        /// create a vector with a given sequence of data of type "T"
-        explicit vector(const T*, size_t);
+            /// return reverse iterator to reverse beginning in the vector
+            vector<T>::iterator rbegin() const;
 
-        /// create a vector with default constructed elements
-        explicit vector(const size_t);
+            /// return reverse iterator to reverse end in the vector
+            vector<T>::iterator rend() const;
 
-        /// create a vector with defalult elements
-        explicit vector(const size_t, const T&);
+            /// return the first element of the vector
+            T& front() const;
 
-        /// create a vector with initialization list
-        vector(std::initializer_list<T> const&);
+            /// return the last element of the vector
+            T& back() const;
 
-        /// destructor
-        /// clears the "_container"
-        ~vector();
+            /// insert an element befor the given position
+            /// throw an exception if the given position is not in the valid range: [0, this->size()]
+            void insert(const T&, const size_t);
 
-        /// vecor assignment operator
-        vector<T>& operator=(const vector<T>&);
+            /// removes the element at the given position
+            /// throws an exception if the given position is not in the valid range: [0, this->size()]
+            void erase(const size_t);
 
-        /// add an element to the end of the vector
-        void push_back(const T&);
+            /// clears the vector
+            void clear();
 
-        /// remove an element from the end of the vector
-        void pop_back();
+            /// compares this vector and the given one lexicographically
+            bool operator<(const vector&) const;
+            bool operator>(const vector&) const;
+            bool operator==(const vector&) const;
+            bool operator!=(const vector&) const;
+            bool operator<=(const vector&) const;
+            bool operator>=(const vector&) const;
 
-        /// return the number of elements in the vector
-        size_t size() const;
-
-        size_t capacity() const;
-
-        /// check if the vector is empty
-        bool empty() const;
-
-        /// return the referece to the element in the vector at the given position
-        /// throw an exception if the key is not valid
-        T& operator[](size_t) const;
-
-        /// return the referece to the vector 
-        vector<T>& operator=(std::initializer_list<T>&);
-
-        /// output the vector in this format: {element0, element1, ...}
-        friend std::ostream& operator<<(std::ostream&, const vector&);
-
-        /// return iterator of the first element in the vector
-        vector<T>::iterator begin() const;
-
-        /// return iterator of the endpoint in the vector
-        vector<T>::iterator end() const;
-
-        /// return reverse iterator to reverse beginning in the vector
-        vector<T>::iterator rbegin() const;
-
-        /// return reverse iterator to reverse end in the vector
-        vector<T>::iterator rend() const;
-
-        /// return the first element of the vector
-        T& front() const;
-
-        /// return the last element of the vector
-        T& back() const;
-
-        /// insert an element befor the given position
-        /// throw an exception if the given position is not in the valid range: [0, this->size()]
-        void insert(const T&, const size_t);
-
-        /// removes the element at the given position
-        /// throws an exception if the given position is not in the valid range: [0, this->size()]
-        void erase(const size_t);
-
-        /// clears the vector
-        void clear();
-
-        /// compares this vector and the given one lexicographically
-        bool operator<(const vector&) const;
-        bool operator>(const vector&) const;
-        bool operator==(const vector&) const;
-        bool operator!=(const vector&) const;
-        bool operator<=(const vector&) const;
-        bool operator>=(const vector&) const;
-
-
-    private:
-        size_t _size;
-        size_t _capacity;
-        T* _container;
-
-        /// checks if memory shoud be reallocated and reallocate
-        void check_and_reallocate();
-        friend class iterator;
     };
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -180,7 +182,7 @@ namespace DS
     }
 
     template < typename T >
-    vector<T>::iterator& vector<T>::iterator::operator=(
+    typename vector<T>::iterator& vector<T>::iterator::operator=(
         const vector<T>::iterator& other
         )
     {
@@ -205,7 +207,7 @@ namespace DS
     }
 
     template < typename T >
-    vector<T>::iterator vector<T>::iterator::operator++(int)
+    typename vector<T>::iterator vector<T>::iterator::operator++(int)
     {
         if (v_ptr == nullptr) {
             throw std::logic_error("The iterator shows nowhere.");
@@ -221,7 +223,7 @@ namespace DS
     }
 
     template < typename T >
-    vector<T>::iterator& vector<T>::iterator::operator++()
+    typename vector<T>::iterator& vector<T>::iterator::operator++()
     {
         if (v_ptr == nullptr) {
             throw std::logic_error("The iterator shows nowhere.");
@@ -236,7 +238,7 @@ namespace DS
     }
 
     template < typename T >
-    vector<T>::iterator vector<T>::iterator::operator--(int)
+    typename vector<T>::iterator vector<T>::iterator::operator--(int)
     {
         if (v_ptr == nullptr) {
             throw std::logic_error("The iterator shows nowhere.");
@@ -252,7 +254,7 @@ namespace DS
     }
 
     template < typename T >
-    vector<T>::iterator& vector<T>::iterator::operator--()
+    typename vector<T>::iterator& vector<T>::iterator::operator--()
     {
         if (v_ptr == nullptr) {
             throw std::logic_error("The iterator shows nowhere.");
@@ -267,13 +269,13 @@ namespace DS
     }
     
     template<typename T>
-    vector<T>::iterator vector<T>::iterator::operator+(size_t num) const
+    typename vector<T>::iterator vector<T>::iterator::operator+(size_t num) const
     {
         return vector<T>::iterator(v_ptr + num);
     }
 
     template<typename T>
-    vector<T>::iterator vector<T>::iterator::operator-(size_t num) const
+    typename vector<T>::iterator vector<T>::iterator::operator-(size_t num) const
     {
         return vector<T>::iterator(v_ptr - num);
     }
@@ -305,7 +307,6 @@ namespace DS
 
         return v_ptr == other.v_ptr;
     }
-
 
     template < typename T >
     bool vector<T>::iterator::operator!=(const vector<T>::iterator& other) const
@@ -511,25 +512,25 @@ namespace DS
     }
 
     template < typename T >
-    vector<T>::iterator vector<T>::begin() const
+    typename vector<T>::iterator vector<T>::begin() const
     {
         return vector<T>::iterator(_container);
     }
 
     template < typename T >
-    vector<T>::iterator vector<T>::end() const
+    typename vector<T>::iterator vector<T>::end() const
     {
         return vector<T>::iterator(_container + _size);
     }
 
     template < typename T >
-    vector<T>::iterator vector<T>::rbegin() const
+    typename vector<T>::iterator vector<T>::rbegin() const
     {
         return vector<T>::iterator(_container + _size - 1);
     }
 
     template < typename T >
-    vector<T>::iterator vector<T>::rend() const
+    typename vector<T>::iterator vector<T>::rend() const
     {
         return vector<T>::iterator(_container -1);
     }
