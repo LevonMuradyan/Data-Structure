@@ -13,7 +13,7 @@ namespace DS
             size_t _capacity;
             T* _container;
 
-            /// checks if memory shoud be reallocated and reallocate
+            /// checks if memory should be reallocated and reallocate
             void check_and_reallocate();
             friend class iterator;
 
@@ -39,13 +39,13 @@ namespace DS
                     /// assignment operator
                     iterator& operator=(const iterator&);
 
-                    /// return the referece to the value of the vector shown by this iterator
+                    /// return the reference to the value of the vector shown by this iterator
                     T& operator*();
             
-                    /// return the referece to the value of the vector shown by this iterator
+                    /// return the reference to the value of the vector shown by this iterator
                     T& operator[](size_t) const;
 
-                    /// increasment and decreasment operators, shold show the next or the previous node
+                    /// increment and decrement operators, should show the next or the previous node
                     iterator& operator++();    // prefix
                     iterator operator++(int);  // postfix
                     iterator& operator--();    // prefix
@@ -76,7 +76,7 @@ namespace DS
             /// create a vector with default constructed elements
             explicit vector(const size_t);
 
-            /// create a vector with defalult elements
+            /// create a vector with default elements
             vector(const size_t, const T&);
 
             /// create a vector with initialization list
@@ -86,7 +86,7 @@ namespace DS
             /// clears the "_container"
             ~vector();
 
-            /// vecor assignment operator
+            /// vector assignment operator
             vector<T>& operator=(const vector<T>&);
 
             /// add an element to the end of the vector
@@ -103,14 +103,14 @@ namespace DS
             /// check if the vector is empty
             bool empty() const;
 
-            /// return the referece to the element in the vector at the given position
+            /// return the reference to the element in the vector at the given position
             /// throw an exception if the key is not valid
             T& operator[](size_t) const;
 
-            /// return the referece to the vector 
+            /// return the reference to the vector 
             vector<T>& operator=(std::initializer_list<T>&);
 
-            /// output the vector in this format: {element0, element1, ...}
+            /// output the vector in this format: {element 0, element 1, ...}
             template < typename Z >  
             friend std::ostream& operator<< (std::ostream&, const vector<Z>&);
 
@@ -134,7 +134,7 @@ namespace DS
             /// return the last element of the vector
             T& back() const;
 
-            /// insert an element befor the given position
+            /// insert an element before the given position
             /// throw an exception if the given position is not in the valid range: [0, this->size()]
             void insert(const T&, const size_t);
 
