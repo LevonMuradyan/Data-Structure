@@ -18,12 +18,28 @@ void TEST(DS::vector<T>& vector, T value, int index) {
     std::cout << "After push_back(" << value << ") :" << std::endl;
     vector.push_back(value);
     print(vector);
-
+    
+    std::cout << "After find(" << value << ") :" << std::endl;
+    if (vector.find(value)) {
+        std::cout << "The value " << value << " was found" << "\n\n";
+    }
+    else {
+        std::cout << "The value " << value << " was not found" << "\n\n";
+    }
+    
     std::cout << "Before pop_back() :" << std::endl;
     print(vector);
     std::cout << "After pop_back() :" << std::endl;
     vector.pop_back();
     print(vector);
+ 
+    std::cout << "After find(" << value << ") :" << std::endl;
+    if (vector.find(value)) {
+        std::cout << "The value " << value << " was found" << "\n\n";
+    }
+    else {
+        std::cout << "The value " << value << " was not found" << "\n\n";
+    }
 
     std::cout << "Before front() :" << std::endl;
     print(vector);

@@ -126,6 +126,8 @@ namespace DS
             /// return reverse iterator to reverse end in the vector
             vector<T>::iterator rend() const;
 
+            bool find(T&) const;
+
             /// return the first element of the vector
             T& front() const;
 
@@ -206,6 +208,7 @@ namespace DS
     {
         return *(v_ptr + index);
     }
+
 
     template < typename T >
     typename vector<T>::iterator vector<T>::iterator::operator++(int)
@@ -530,6 +533,17 @@ namespace DS
     typename vector<T>::iterator vector<T>::rend() const
     {
         return vector<T>::iterator(_container -1);
+    }
+
+    template < typename T >
+    bool vector<T>::find(T& value) const
+    {
+        for(int i = 0; i< _size; ++i) {
+            if(_container[i] == value) {
+                return true;
+            }
+        }
+        return false;
     }
 
     template < typename T >
