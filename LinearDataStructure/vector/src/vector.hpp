@@ -22,7 +22,7 @@ namespace DS
             using value_type = T;
             using pointer = T*;
             using reference = T&;
-            using difference_type = size_t;
+            using difference_type = int;
             using iterator_category = std::random_access_iterator_tag;
 
         private:
@@ -59,9 +59,9 @@ namespace DS
             iterator operator--(int);  // postfix
 
             /// addition, subtraction by number 
-            iterator operator+(difference_type) const;
-            iterator operator-(difference_type) const;
-            int operator-(const iterator&) const;
+            iterator operator+(size_t) const;
+            iterator operator-(size_t) const;
+            difference_type operator-(const iterator&) const;
             
             /// boolean operators comparing two iterators
             bool operator<(const iterator&) const;
@@ -283,14 +283,14 @@ namespace DS
     }
 
     template<typename T>
-    typename vector<T>::iterator vector<T>::iterator::operator+(difference_type num) const
+    typename vector<T>::iterator vector<T>::iterator::operator+(size_t num) const
     {
         
         return vector<T>::iterator(v_ptr + num);
     }
 
     template<typename T>
-    typename vector<T>::iterator vector<T>::iterator::operator-(difference_type num) const
+    typename vector<T>::iterator vector<T>::iterator::operator-(size_t num) const
     {
         return vector<T>::iterator(v_ptr - num);
     }
